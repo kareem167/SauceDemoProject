@@ -2,6 +2,7 @@ package com.SauceDemo.utils;
 
 import java.io.IOException;
 import java.util.Properties;
+import java.io.File;
 
 public class ConfigUtils {
 
@@ -10,15 +11,40 @@ public class ConfigUtils {
 
     private ConfigUtils() throws IOException {
         String envuser=System.getProperty("envuser","standard_user").toUpperCase();
+
+        String configDirectory = System.getProperty("user.dir")
+                + File.separator
+                + "src"
+                + File.separator
+                + "test"
+                + File.separator
+                + "java"
+                + File.separator
+                + "com"
+                + File.separator
+                + "SauceDemo"
+                + File.separator
+                + "config"
+                + File.separator;
+
         switch (envuser){
             case "STANDARD_USER":
-                properties=PropertiesUtils.LoadProperties("C:\\Users\\dell\\IdeaProjects\\SauceDemoProject1\\src\\test\\java\\com\\SauceDemo\\Config\\standard_user.properties");
+                properties=PropertiesUtils.LoadProperties(configDirectory+"standard_user.properties");
                 break;
             case "PROBLEM_USER":
-                properties=PropertiesUtils.LoadProperties("C:\\Users\\dell\\IdeaProjects\\SauceDemoProject1\\src\\test\\java\\com\\SauceDemo\\Config\\problem_user.properties");
+                properties=PropertiesUtils.LoadProperties(configDirectory+"problem_user.properties");
                 break;
             case "LOCKED_OUT_USER":
-                properties=PropertiesUtils.LoadProperties("C:\\Users\\dell\\IdeaProjects\\SauceDemoProject1\\src\\test\\java\\com\\SauceDemo\\Config\\locked_out_user.properties");
+                properties=PropertiesUtils.LoadProperties(configDirectory+"locked_out_user.properties");
+                break;
+            case "PERFORMANCE_GLITCH_USER":
+                properties=PropertiesUtils.LoadProperties(configDirectory+"performance_glitch_user.properties");
+                break;
+            case "ERROR_USER":
+                properties=PropertiesUtils.LoadProperties(configDirectory+"error_user.properties");
+                break;
+            case "VISUAL_USER":
+                properties=PropertiesUtils.LoadProperties(configDirectory+"visual_user.properties");
                 break;
             default:
                 throw new RuntimeException("this user "+envuser+" doesnt exist");

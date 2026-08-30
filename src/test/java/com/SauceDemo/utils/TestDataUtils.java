@@ -1,5 +1,6 @@
 package com.SauceDemo.utils;
 
+import java.io.File;
 import java.io.IOException;
 import java.util.Properties;
 
@@ -12,12 +13,29 @@ public class TestDataUtils {
     private TestDataUtils() throws IOException {
 
         String testData = System.getProperty("testData", "testdata1").toLowerCase();
+
+        String configDirectory = System.getProperty("user.dir")
+                + File.separator
+                + "src"
+                + File.separator
+                + "test"
+                + File.separator
+                + "java"
+                + File.separator
+                + "com"
+                + File.separator
+                + "SauceDemo"
+                + File.separator
+                + "config"
+                + File.separator;
+
         switch (testData){
             case "testdata1":
-                properties=PropertiesUtils.LoadProperties("C:\\Users\\dell\\IdeaProjects\\SauceDemoProject1\\src\\test\\java\\com\\SauceDemo\\Config\\testdata1.properties");
+                properties=PropertiesUtils.LoadProperties(configDirectory+"testdata1.properties");
                 break;
             case "testdata2":
-                properties=PropertiesUtils.LoadProperties("C:\\Users\\dell\\IdeaProjects\\SauceDemoProject1\\src\\test\\java\\com\\SauceDemo\\Config\\testdata2.properties");
+                properties=PropertiesUtils.LoadProperties(configDirectory+"testdata2.properties");
+                break;
             default:
                 throw new RuntimeException("this test data "+ testData + "doesnt exist" );
         }
